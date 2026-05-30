@@ -1,0 +1,29 @@
+# Désactiver complètement le cache pour MALAP METSI
+
+<IfModule mod_headers.c>
+    # Désactiver le cache pour tous les fichiers
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+    
+    # Désactiver le cache pour les fichiers JavaScript
+    <FilesMatch "\.(js|mjs)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    </FilesMatch>
+    
+    # Désactiver le cache pour les fichiers CSS
+    <FilesMatch "\.css$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    </FilesMatch>
+    
+    # Désactiver le cache pour les fichiers HTML
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    </FilesMatch>
+</IfModule>
+
+# Désactiver l'ETag
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TECHNOLOGIES_ARCHITECTURE</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1
+id="pricecheck---technologies-utilisees-et-architecture-logique">PriceCheck
+- Technologies Utilisees et Architecture Logique</h1>
+<h2 id="technologies-utilisees">1) Technologies utilisees</h2>
+<h3 id="frontend-spa">Frontend (SPA)</h3>
+<ul>
+<li><strong>TypeScript</strong>: ecriture du code applicatif et des
+types.</li>
+<li><strong>Vite</strong>: bundler et serveur de developpement
+(<code>vite</code>, <code>npm run dev</code>).</li>
+<li><strong>HTML5 + CSS3</strong>: templates et styles globaux
+(<code>src/style.css</code>).</li>
+<li><strong>Application Single Page (SPA)</strong>: rendu dynamique dans
+<code>#app</code> (pas de rechargement de page).</li>
+</ul>
+<h3 id="routing-et-navigation">Routing et navigation</h3>
+<ul>
+<li><strong>Router personnalise</strong> (fichier
+<code>src/router.ts</code>) qui mappe un nom de page vers:
+<ul>
+<li>une fonction <code>render()</code> (template HTML)</li>
+<li>une fonction <code>init()</code> (attache les evenements)</li>
+</ul></li>
+<li>Gestion des pages proteges (auth) et de la page admin (role
+admin).</li>
+<li>Historique de navigation pour les boutons <strong>Retour /
+Avancer</strong>.</li>
+</ul>
+<h3 id="donnees-et-stockage">Donnees et stockage</h3>
+<ul>
+<li><strong>Model “database.ts”</strong>: donnees produits et magasins +
+fonctions de recherche/lecture.</li>
+<li><strong>Persistence localStorage</strong>:
+<ul>
+<li><code>src/app-db.ts</code> encapsule
+<code>getDbValue/setDbJson/...</code></li>
+<li><code>src/admin-data.ts</code> persiste les modifications admin
+(produits, imageUrl, prix, magasins)</li>
+<li><code>src/orders.ts</code> persiste les commandes
+(<code>pc_orders</code>) et la derniere commande
+(<code>pc_last_order_id</code>)</li>
+</ul></li>
+</ul>
+<h3 id="scanner-de-code-barres">Scanner de code-barres</h3>
+<ul>
+<li><strong>Camera</strong> et <strong>upload fichier</strong> via les
+APIs web (<code>navigator.mediaDevices.getUserMedia</code>,
+<code>FileReader</code>) dans <code>src/scanner.ts</code>.</li>
+<li>La detection est actuellement <strong>simulee</strong> (fonction
+<code>simulateScan</code> + delais) plutot que via une librairie de
+scan.</li>
+<li>La dependance <code>quagga</code> est presente dans
+<code>package.json</code>, mais n’est pas referencee dans le code
+<code>src/</code> actuel.</li>
+</ul>
+<h3 id="cartographie">Cartographie</h3>
+<ul>
+<li><strong>Leaflet</strong> charge dynamiquement dans
+<code>src/tracking.ts</code>.</li>
+<li>Tiles <strong>OpenStreetMap</strong> via
+<code>https://{s}.tile.openstreetmap.org/...</code>.</li>
+</ul>
+<h3 id="images-produits">Images produits</h3>
+<ul>
+<li><code>src/barcode-generator.ts</code> genere une image produit:
+<ul>
+<li>en priorite via <code>product.imageUrl</code></li>
+<li>sinon via fallback (categorie / Open Food Facts selon barcode)</li>
+</ul></li>
+</ul>
+<h3 id="pwa">PWA</h3>
+<ul>
+<li>Logique d’installation (prompt) geree dans
+<code>src/pwa-install.ts</code> via l’event
+<code>beforeinstallprompt</code>.</li>
+</ul>
+<h3 id="auth-mode-demo-local">Auth (mode demo / local)</h3>
+<ul>
+<li><strong>Authentification simple localStorage</strong> via
+<code>src/auth.ts</code>:
+<ul>
+<li>session et role admin stockes dans localStorage
+(<code>pc_session</code>, <code>pc_role</code>)</li>
+</ul></li>
+</ul>
+<h2 id="architecture-logique-de-lapplication">2) Architecture logique de
+l’application</h2>
+<h3 id="vue-densemble-decomposition">Vue d’ensemble (decomposition)</h3>
+<ul>
+<li><strong>Point d’entree</strong>: <code>src/main.ts</code>
+<ul>
+<li>demarre <code>navigateTo('home')</code></li>
+</ul></li>
+<li><strong>Router</strong>: <code>src/router.ts</code>
+<ul>
+<li>centralise la navigation et les gardes (pages proteges, admin)</li>
+<li>injecte le HTML dans <code>#app</code> puis appelle
+<code>init()</code> de la page</li>
+</ul></li>
+<li><strong>Templates</strong>: <code>src/pages.ts</code>
+<ul>
+<li>contient les rendus HTML des pages (home, scanner, admin, etc.)</li>
+</ul></li>
+<li><strong>Modules par fonctionnalite</strong>:
+<ul>
+<li><code>home.ts</code>: accueil et mise en panier (selection
+produit/store)</li>
+<li><code>catalog.ts</code>: catalogue et comparaison de prix</li>
+<li><code>scanner.ts</code>: scan et creation de la selection</li>
+<li><code>cart.ts</code>: panier (calcul total, frais livraison selon
+mode)</li>
+<li><code>checkout.ts</code>: paiement + creation de commande</li>
+<li><code>confirmation.ts</code>: recap / facture (local)</li>
+<li><code>tracking.ts</code>: suivi commande (polling localStorage)</li>
+<li><code>promotions.ts</code>: gestion/affichage promotions</li>
+<li><code>wallet.ts</code>: portefeuille/fidelite (contenu UI)</li>
+<li><code>profile.ts</code>: profil + acces admin</li>
+<li><code>admin.ts</code>: interface admin + actions (produits, prix,
+magasins, commandes)</li>
+</ul></li>
+</ul>
+<h3 id="couche-donnees-data-layer">Couche donnees (data layer)</h3>
+<ul>
+<li><code>src/database.ts</code>
+<ul>
+<li><code>PRODUCTS</code>: liste des produits (imageUrl + prix par
+magasin)</li>
+<li><code>STORES</code>: liste des supermarches (deliveryFee, etc.)</li>
+<li>fonctions de recherche/lecture (getAllProducts, searchProducts,
+getStoresByCity, …)</li>
+</ul></li>
+<li><code>src/app-db.ts</code>
+<ul>
+<li>wrappers localStorage pour lire/ ecrire JSON</li>
+</ul></li>
+<li><code>src/admin-data.ts</code>
+<ul>
+<li>ajoute/modifie supprime/ajuste produits et magasins, puis
+persiste</li>
+<li>ex: <code>updateProductImage</code>, <code>removeStore</code>,
+<code>addStore</code>, <code>addProduct</code>,
+<code>addOrUpdatePrice</code></li>
+</ul></li>
+<li><code>src/orders.ts</code>
+<ul>
+<li><code>createOrderFromSelection()</code> -&gt; cree une commande en
+<code>pending</code></li>
+<li><code>updateOrderStatus()</code> -&gt; passe <code>pending</code>
+vers <code>confirmed</code></li>
+<li><code>getPendingOrders()</code> -&gt; liste des commandes en attente
+(pour admin)</li>
+</ul></li>
+</ul>
+<h3 id="flux-logique-de-commande">Flux logique de commande</h3>
+<ol type="1">
+<li>Selection du produit + mode (livraison ou sur place)</li>
+<li>Sauvegarde via <code>saveCheckoutSelection()</code> (orders.ts)</li>
+<li>Panier: affichage prix et livraison selon selection</li>
+<li>Checkout: paiement -&gt;
+<code>createOrderFromSelection()</code></li>
+<li>Confirmation: montre numero commande + statut</li>
+<li>Admin: <code>Valider une commande</code> -&gt;
+<code>updateOrderStatus(status='confirmed')</code></li>
+<li>Tracking: polling localStorage -&gt; mise a jour UI jusqu’a
+confirmation</li>
+</ol>
+</body>
+</html>

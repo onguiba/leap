@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Jean Dupont",
+    "email": "jean.dupont@example.com",
+    "phone": "+237 670 12 34 56",
+    "address": "Bonapriso, Douala",
+    "walletBalance": 15000,
+    "loyaltyPoints": 2450,
+    "loyaltyLevel": "Gold",
+    "createdAt": "2024-01-15",
+    "orders": []
+  }
+]

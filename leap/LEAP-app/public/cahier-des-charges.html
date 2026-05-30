@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cahier des Charges — PriceCheck</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; font-size: 10.5pt; line-height: 1.65; }
+
+  /* PAGE LAYOUT */
+  .page { max-width: 210mm; margin: 0 auto; background: white; }
+
+  /* COVER PAGE */
+  .cover {
+    min-height: 100vh; display: flex; flex-direction: column;
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 50%, #0f4c2a 100%);
+    color: white; padding: 60px 70px; position: relative; overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,196,113,0.15) 0%, transparent 70%);
+  }
+  .cover-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 80px; }
+  .cover-logo-icon {
+    width: 64px; height: 64px; background: linear-gradient(135deg, #00c471, #00a85e);
+    border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    font-size: 28px; box-shadow: 0 8px 24px rgba(0,196,113,0.4);
+  }
+  .cover-logo-text { font-size: 28px; font-weight: 900; letter-spacing: -0.5px; }
+  .cover-logo-text span { color: #f97316; }
+  .cover-tagline { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-label {
+    display: inline-block; background: rgba(0,196,113,0.2); color: #00c471;
+    border: 1px solid rgba(0,196,113,0.4); padding: 6px 18px; border-radius: 100px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .cover-title { font-size: 42px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+  .cover-title span { color: #00c471; }
+  .cover-subtitle { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 480px; line-height: 1.7; }
+  .cover-meta {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px;
+    padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .cover-meta-item label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); display: block; margin-bottom: 4px; }
+  .cover-meta-item span { font-size: 13px; font-weight: 700; color: white; }
+
+  /* CONTENT PAGES */
+  .content { padding: 50px 70px; }
+  .section { margin-bottom: 40px; page-break-inside: avoid; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .section-num {
+    width: 32px; height: 32px; background: linear-gradient(135deg, #00c471, #00a85e);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 13px; font-weight: 800; flex-shrink: 0;
+  }
+  .section-title { font-size: 16px; font-weight: 800; color: #0f172a; }
+  .section-subtitle { font-size: 11px; color: #64748b; margin-top: 1px; }
+
+  p { color: #334155; margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; color: #334155; }
+  li { margin-bottom: 5px; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+  .card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  .card {
+    background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 16px; position: relative; overflow: hidden;
+  }
+  .card-accent { border-left: 3px solid #00c471; }
+  .card-accent-orange { border-left: 3px solid #f97316; }
+  .card-accent-blue { border-left: 3px solid #1a73e8; }
+  .card-accent-red { border-left: 3px solid #ef4444; }
+  .card h4 { font-size: 11px; font-weight: 800; color: #0f172a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .card p { font-size: 9.5pt; color: #64748b; margin: 0; }
+  .card .icon { font-size: 22px; margin-bottom: 8px; display: block; }
+
+  /* TECH BADGES */
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tech-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px;
+    padding: 6px 12px; font-size: 9.5pt; font-weight: 700; color: #334155;
+  }
+  .tech-badge.primary { background: #e6f9f1; border-color: #a7f3d0; color: #065f46; }
+  .tech-badge.blue { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
+  .tech-badge.orange { background: #fff7ed; border-color: #fed7aa; color: #9a3412; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 9.5pt; }
+  th { background: #0f172a; color: white; padding: 10px 14px; text-align: left; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child { border-radius: 0 8px 0 0; }
+  td { padding: 9px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:last-child td { border-bottom: none; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 8px; font-weight: 700; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-orange { background: #ffedd5; color: #9a3412; }
+
+  /* STATS ROW */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+  .stat-box {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border-radius: 12px; padding: 16px; text-align: center; color: white;
+  }
+  .stat-box .num { font-size: 22px; font-weight: 900; color: #00c471; }
+  .stat-box .lbl { font-size: 9px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  /* PAGE BREAK */
+  .page-break { page-break-before: always; padding-top: 50px; }
+
+  /* FOOTER */
+  .doc-footer {
+    margin-top: 50px; padding-top: 20px; border-top: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.5pt; color: #94a3b8;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; }
+    .cover { min-height: 100vh; }
+    .page-break { page-break-before: always; }
+    .section { page-break-inside: avoid; }
+  }
+  @page { margin: 0; size: A4; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== COVER PAGE ===== -->
+<div class="cover">
+  <div class="cover-logo">
+    <div class="cover-logo-icon">🔍</div>
+    <div>
+      <div class="cover-logo-text">Price<span>Check</span></div>
+      <div class="cover-tagline">Comparez. Économisez. Achetez.</div>
+    </div>
+  </div>
+  <div class="cover-main">
+    <div class="cover-label">Document Officiel</div>
+    <h1 class="cover-title">Cahier des<br><span>Charges</span></h1>
+    <p class="cover-subtitle">
+      Application web progressive de comparaison de prix dans les supermarchés
+      et marchés du Cameroun — avec commande en ligne, suivi de livraison et wallet numérique.
+    </p>
+  </div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Projet</label>
+      <span>PriceCheck v2.4</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Marché cible</label>
+      <span>Cameroun 🇨🇲</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Date</label>
+      <span>Mars 2026</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Type</label>
+      <span>PWA / SPA</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Langue</label>
+      <span>Français</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Statut</label>
+      <span>En développement</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<div class="content">
+
+  <!-- 1. PRÉSENTATION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Présentation du Projet</div>
+        <div class="section-subtitle">Contexte, vision et objectifs généraux</div>
+      </div>
+    </div>
+    <p>
+      <strong>PriceCheck</strong> est une application web progressive (PWA) destinée aux consommateurs camerounais.
+      Elle permet de comparer en temps réel les prix de produits alimentaires et ménagers dans les supermarchés,
+      boulangeries et marchés des 6 principales villes du Cameroun.
+    </p>
+    <p>
+      Face à la dispersion des prix entre enseignes et à l'absence d'outil de comparaison local,
+      PriceCheck répond à un besoin concret : aider les ménages à faire leurs courses de manière
+      plus économique, sans se déplacer inutilement.
+    </p>
+    <div class="stats-row">
+      <div class="stat-box"><div class="num">45+</div><div class="lbl">Produits</div></div>
+      <div class="stat-box"><div class="num">40+</div><div class="lbl">Magasins</div></div>
+      <div class="stat-box"><div class="num">6</div><div class="lbl">Villes</div></div>
+      <div class="stat-box"><div class="num">500 F</div><div class="lbl">Livraison</div></div>
+    </div>
+  </div>
+
+  <!-- 2. OBJECTIFS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Objectifs du Projet</div>
+        <div class="section-subtitle">Ce que l'application doit accomplir</div>
+      </div>
+    </div>
+    <div class="card-grid">
+      <div class="card card-accent">
+        <span class="icon">💰</span>
+        <h4>Économies pour les ménages</h4>
+        <p>Permettre aux utilisateurs de trouver le meilleur prix pour chaque produit dans leur ville, réduisant les dépenses alimentaires.</p>
+      </div>
+      <div class="card card-accent-orange">
+        <span class="icon">📍</span>
+        <h4>Couverture géographique</h4>
+        <p>Couvrir les 6 grandes villes : Douala, Yaoundé, Bafoussam, Garoua, Bamenda et Maroua avec des données locales.</p>
+      </div>
+      <div class="card card-accent-blue">
+        <span class="icon">🚚</span>
+        <h4>Commande et livraison</h4>
+        <p>Permettre la commande en ligne avec livraison à domicile (500 FCFA) ou retrait gratuit en magasin.</p>
+      </div>
+      <div class="card card-accent-red">
+        <span class="icon">📱</span>
+        <h4>Accessibilité mobile</h4>
+        <p>Fonctionner comme une application native sur mobile via PWA, installable sans passer par un store.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PÉRIMÈTRE FONCTIONNEL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Périmètre Fonctionnel</div>
+        <div class="section-subtitle">Modules et fonctionnalités implémentés</div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Fonctionnalités</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🏠 Accueil</strong></td>
+          <td>Hero section, statistiques, produits populaires par ville, recherche</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>🔐 Authentification</strong></td>
+          <td>Inscription (nom, prénom, téléphone, mot de passe), connexion, session localStorage</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>🔍 Comparateur</strong></td>
+          <td>Catalogue produits, filtrage par catégorie, comparaison multi-magasins par ville</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>📷 Scanner</strong></td>
+          <td>Scan code-barres via caméra (QuaggaJS), galerie photo, saisie manuelle</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>🛒 Panier</strong></td>
+          <td>Ajout produits, récapitulatif, choix livraison/retrait, passage en caisse</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>💳 Paiement</strong></td>
+          <td>Orange Money, MTN Mobile Money, Carte Bancaire, génération de facture</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>✅ Confirmation</strong></td>
+          <td>Récapitulatif commande, facture PDF, code-barres de suivi</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>🗺️ Suivi commande</strong></td>
+          <td>Timeline statuts, carte Leaflet/OpenStreetMap, info livreur, GPS réel</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>🎉 Promotions</strong></td>
+          <td>Offres à durée limitée, badges de réduction, économies calculées</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>💰 Wallet</strong></td>
+          <td>Solde FCFA, points fidélité (Bronze/Gold/Platinum), historique transactions, rechargement</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>👤 Profil</strong></td>
+          <td>Infos personnelles, adresses, modes de paiement, notifications, déconnexion</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>📍 Sélecteur de ville</strong></td>
+          <td>Choix parmi 6 villes, filtrage automatique des produits et magasins</td>
+          <td><span class="badge badge-green">Livré</span></td>
+        </tr>
+        <tr>
+          <td><strong>📲 PWA</strong></td>
+          <td>Manifest, icônes, prompt d'installation, mode hors-ligne partiel</td>
+          <td><span class="badge badge-blue">En cours</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- end content -->
+
+<!-- PAGE 2 -->
+<div class="content page-break">
+
+  <!-- 4. TECHNOLOGIES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Stack Technologique</div>
+        <div class="section-subtitle">Langages, frameworks et bibliothèques utilisés</div>
+      </div>
+    </div>
+
+    <div class="card-grid-3">
+      <div class="card card-accent">
+        <span class="icon">⚡</span>
+        <h4>Frontend Core</h4>
+        <p><strong>TypeScript 5.9</strong> — typage statique, interfaces, modules ES</p>
+        <p style="margin-top:6px;"><strong>Vite 8</strong> — bundler ultra-rapide, HMR, build optimisé</p>
+      </div>
+      <div class="card card-accent-blue">
+        <span class="icon">🎨</span>
+        <h4>Interface</h4>
+        <p><strong>CSS3 pur</strong> — variables CSS, Grid, Flexbox, animations</p>
+        <p style="margin-top:6px;"><strong>Inter Font</strong> — typographie premium Google Fonts</p>
+      </div>
+      <div class="card card-accent-orange">
+        <span class="icon">🗺️</span>
+        <h4>Cartographie</h4>
+        <p><strong>Leaflet 1.9.4</strong> — cartes interactives</p>
+        <p style="margin-top:6px;"><strong>OpenStreetMap</strong> — tuiles gratuites, sans clé API</p>
+      </div>
+      <div class="card card-accent-red">
+        <span class="icon">📷</span>
+        <h4>Scanner</h4>
+        <p><strong>QuaggaJS 0.12</strong> — lecture code-barres via caméra ou image</p>
+        <p style="margin-top:6px;"><strong>MediaDevices API</strong> — accès caméra navigateur</p>
+      </div>
+      <div class="card card-accent">
+        <span class="icon">💾</span>
+        <h4>Persistance</h4>
+        <p><strong>localStorage</strong> — session, profil utilisateur, panier, commandes</p>
+        <p style="margin-top:6px;"><strong>JSON statique</strong> — base de données produits/magasins</p>
+      </div>
+      <div class="card card-accent-blue">
+        <span class="icon">📲</span>
+        <h4>PWA</h4>
+        <p><strong>Web App Manifest</strong> — installable sur mobile</p>
+        <p style="margin-top:6px;"><strong>Geolocation API</strong> — position GPS pour la carte</p>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;">
+      <p style="font-size:9.5pt; font-weight:700; color:#0f172a; margin-bottom:8px;">Toutes les dépendances :</p>
+      <div class="tech-grid">
+        <span class="tech-badge primary">TypeScript 5.9</span>
+        <span class="tech-badge primary">Vite 8.0</span>
+        <span class="tech-badge blue">QuaggaJS 0.12</span>
+        <span class="tech-badge blue">Leaflet 1.9.4</span>
+        <span class="tech-badge orange">OpenStreetMap</span>
+        <span class="tech-badge">CSS Variables</span>
+        <span class="tech-badge">localStorage API</span>
+        <span class="tech-badge">Geolocation API</span>
+        <span class="tech-badge">MediaDevices API</span>
+        <span class="tech-badge">Web App Manifest</span>
+        <span class="tech-badge">Inter (Google Fonts)</span>
+        <span class="tech-badge">ES Modules</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ARCHITECTURE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Architecture de l'Application</div>
+        <div class="section-subtitle">Organisation du code et pattern de navigation</div>
+      </div>
+    </div>
+    <p>
+      L'application suit une architecture <strong>SPA (Single Page Application)</strong> sans framework,
+      avec un routeur maison basé sur le rendu dynamique du DOM. Chaque page est un module TypeScript
+      indépendant qui exporte une fonction <code>getXxxPage()</code> (HTML) et <code>initXxx()</code> (logique).
+    </p>
+    <table>
+      <thead>
+        <tr><th>Fichier</th><th>Rôle</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>main.ts</code></td><td>Point d'entrée — initialise le routeur</td></tr>
+        <tr><td><code>router.ts</code></td><td>Routeur SPA — gestion des pages, guards d'authentification</td></tr>
+        <tr><td><code>database.ts</code></td><td>Base de données statique — 45 produits, 40+ magasins, 6 villes</td></tr>
+        <tr><td><code>components.ts</code></td><td>Composants réutilisables — header, footer, back button</td></tr>
+        <tr><td><code>auth.ts</code></td><td>Authentification — inscription, connexion, session localStorage</td></tr>
+        <tr><td><code>home.ts</code></td><td>Page d'accueil — produits populaires, recherche, commande rapide</td></tr>
+        <tr><td><code>catalog.ts</code></td><td>Comparateur de prix — filtres catégorie, tri par prix</td></tr>
+        <tr><td><code>scanner.ts</code></td><td>Scanner code-barres — caméra, galerie, saisie manuelle</td></tr>
+        <tr><td><code>cart.ts</code></td><td>Panier — gestion articles, calcul total, livraison/retrait</td></tr>
+        <tr><td><code>checkout.ts</code></td><td>Paiement — Orange Money, MTN MoMo, Carte Bancaire</td></tr>
+        <tr><td><code>confirmation.ts</code></td><td>Confirmation — facture, code-barres, récapitulatif</td></tr>
+        <tr><td><code>tracking.ts</code></td><td>Suivi — timeline, carte Leaflet, animation livreur GPS</td></tr>
+        <tr><td><code>promotions.ts</code></td><td>Promotions — offres limitées, badges réduction</td></tr>
+        <tr><td><code>wallet.ts</code></td><td>Wallet — solde FCFA, points fidélité, transactions</td></tr>
+        <tr><td><code>profile.ts</code></td><td>Profil — infos, adresses, paiements, notifications</td></tr>
+        <tr><td><code>city-selector.ts</code></td><td>Sélecteur de ville — filtre les données par localisation</td></tr>
+        <tr><td><code>style.css</code></td><td>Design system complet — variables, composants, responsive</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- PAGE 3 -->
+<div class="content page-break">
+
+  <!-- 6. DONNÉES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">Données et Base de Produits</div>
+        <div class="section-subtitle">Catalogue, magasins et couverture géographique</div>
+      </div>
+    </div>
+    <p>
+      La base de données est entièrement statique (TypeScript), sans backend ni API externe.
+      Elle contient des produits avec codes-barres réels camerounais et des magasins géolocalisés par ville.
+    </p>
+    <div class="card-grid">
+      <div class="card card-accent">
+        <h4>Catégories de produits</h4>
+        <ul style="margin-top:8px; font-size:9.5pt;">
+          <li>Produits laitiers (lait, yaourt, fromage, beurre)</li>
+          <li>Boulangerie (pain, farine)</li>
+          <li>Épicerie (riz, pâtes, huile, sucre, sel)</li>
+          <li>Fruits &amp; Légumes (tomates, bananes, carottes…)</li>
+          <li>Viandes &amp; Poissons (poulet, bœuf, crevettes…)</li>
+          <li>Boissons (eau Tangui, bière 33, Top Orange…)</li>
+          <li>Alimentation camerounaise (Maggi, Sosucam, Chococam…)</li>
+          <li>Hygiène &amp; Entretien (savon Azur, détergent Madar…)</li>
+        </ul>
+      </div>
+      <div class="card card-accent-blue">
+        <h4>Couverture par ville</h4>
+        <table style="margin-top:8px; font-size:9pt;">
+          <thead><tr><th>Ville</th><th>Magasins</th></tr></thead>
+          <tbody>
+            <tr><td>Douala</td><td>15 enseignes</td></tr>
+            <tr><td>Yaoundé</td><td>12 enseignes</td></tr>
+            <tr><td>Bafoussam</td><td>4 enseignes</td></tr>
+            <tr><td>Garoua</td><td>3 enseignes</td></tr>
+            <tr><td>Bamenda</td><td>3 enseignes</td></tr>
+            <tr><td>Maroua</td><td>3 enseignes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <p style="font-size:9.5pt; color:#334155;">
+        Chaque magasin dispose de : nom, logo, ville, adresse, téléphone, horaires, disponibilité livraison,
+        frais de livraison, commande minimum, note et coordonnées GPS (latitude/longitude).
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. DESIGN SYSTEM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">Design System</div>
+        <div class="section-subtitle">Charte graphique et composants UI</div>
+      </div>
+    </div>
+    <div class="card-grid-3">
+      <div class="card">
+        <h4>🎨 Palette de couleurs</h4>
+        <div style="margin-top:8px; display:flex; flex-direction:column; gap:5px; font-size:9pt;">
+          <div style="display:flex; align-items:center; gap:8px;"><div style="width:16px;height:16px;border-radius:4px;background:#00c471;flex-shrink:0;"></div> Primaire — #00c471</div>
+          <div style="display:flex; align-items:center; gap:8px;"><div style="width:16px;height:16px;border-radius:4px;background:#f97316;flex-shrink:0;"></div> Accent — #f97316</div>
+          <div style="display:flex; align-items:center; gap:8px;"><div style="width:16px;height:16px;border-radius:4px;background:#ef4444;flex-shrink:0;"></div> Danger — #ef4444</div>
+          <div style="display:flex; align-items:center; gap:8px;"><div style="width:16px;height:16px;border-radius:4px;background:#1a73e8;flex-shrink:0;"></div> Secondaire — #1a73e8</div>
+          <div style="display:flex; align-items:center; gap:8px;"><div style="width:16px;height:16px;border-radius:4px;background:#0f172a;flex-shrink:0;"></div> Dark — #0f172a</div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>🔤 Typographie</h4>
+        <p style="margin-top:8px;"><strong>Inter</strong> — police principale</p>
+        <ul style="margin-top:6px; font-size:9pt;">
+          <li>Titres : 900 (Black)</li>
+          <li>Sous-titres : 700–800 (Bold)</li>
+          <li>Corps : 400–600 (Regular)</li>
+          <li>Labels : 700 + uppercase</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>📐 Composants UI</h4>
+        <ul style="margin-top:8px; font-size:9pt;">
+          <li>Boutons (primary, secondary, ghost, danger)</li>
+          <li>Cards produits avec hover animé</li>
+          <li>Cards promo avec badge réduction</li>
+          <li>Wallet cards dégradées</li>
+          <li>Timeline de suivi</li>
+          <li>Modales (rechargement)</li>
+          <li>Toggles notifications</li>
+          <li>Formulaires auth</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <p style="font-size:9.5pt; color:#334155;">
+        Le design est <strong>responsive</strong> avec des breakpoints à 1024px, 768px et 480px.
+        Toutes les transitions utilisent <code>cubic-bezier(0.4, 0, 0.2, 1)</code> pour un rendu fluide.
+        Les ombres, rayons et espacements sont définis via des variables CSS globales.
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. SÉCURITÉ & AUTH -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div>
+        <div class="section-title">Authentification et Sécurité</div>
+        <div class="section-subtitle">Gestion des accès et protection des routes</div>
+      </div>
+    </div>
+    <div class="card-grid">
+      <div class="card card-accent">
+        <h4>Système d'authentification</h4>
+        <ul style="margin-top:8px; font-size:9.5pt;">
+          <li>Inscription : prénom, nom, téléphone, mot de passe (min. 6 caractères)</li>
+          <li>Connexion par numéro de téléphone + mot de passe</li>
+          <li>Session stockée dans <code>localStorage</code> (clé <code>pc_session</code>)</li>
+          <li>Profil utilisateur stocké dans <code>pc_user</code></li>
+          <li>Déconnexion avec suppression de session</li>
+        </ul>
+      </div>
+      <div class="card card-accent-orange">
+        <h4>Routes protégées (guards)</h4>
+        <ul style="margin-top:8px; font-size:9.5pt;">
+          <li>🔒 <strong>Checkout</strong> — paiement</li>
+          <li>🔒 <strong>Confirmation</strong> — après commande</li>
+          <li>🔒 <strong>Wallet</strong> — solde et transactions</li>
+          <li>🔒 <strong>Tracking</strong> — suivi de livraison</li>
+          <li>🔒 <strong>Profile</strong> — données personnelles</li>
+          <li>✅ Redirection automatique vers /auth si non connecté</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. MODES DE PAIEMENT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div>
+        <div class="section-title">Modes de Paiement</div>
+        <div class="section-subtitle">Solutions de paiement adaptées au marché camerounais</div>
+      </div>
+    </div>
+    <div class="card-grid-3">
+      <div class="card" style="border-left:3px solid #ff6600;">
+        <span class="icon">🟧</span>
+        <h4>Orange Money</h4>
+        <p>Paiement mobile sécurisé — opérateur Orange Cameroun. Mode de paiement par défaut.</p>
+      </div>
+      <div class="card" style="border-left:3px solid #ffcc00;">
+        <span class="icon">🟨</span>
+        <h4>MTN Mobile Money</h4>
+        <p>MoMo — solution de paiement mobile MTN, très répandue au Cameroun.</p>
+      </div>
+      <div class="card card-accent-blue">
+        <span class="icon">💳</span>
+        <h4>Carte Bancaire</h4>
+        <p>Visa et Mastercard acceptées pour les utilisateurs disposant d'une carte internationale.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOC FOOTER -->
+  <div class="doc-footer">
+    <span>PriceCheck — Cahier des Charges v2.4 — Mars 2026</span>
+    <span>Confidentiel — Usage interne</span>
+  </div>
+
+</div><!-- end content page 3 -->
+
+<!-- PRINT BUTTON (hidden in print) -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:9999;" class="no-print">
+  <button onclick="window.print()"
+    style="background:linear-gradient(135deg,#00c471,#00a85e);color:white;border:none;
+    padding:14px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,196,113,0.4);font-family:Inter,sans-serif;">
+    🖨️ Imprimer / Sauvegarder en PDF
+  </button>
+</div>
+<style>
+  @media print { .no-print { display: none !important; } }
+</style>
+
+</div><!-- end .page -->
+</body>
+</html>

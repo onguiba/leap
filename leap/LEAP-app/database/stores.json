@@ -1,0 +1,108 @@
+[
+  {
+    "id": 1,
+    "name": "Mahima Akwa",
+    "logo": "🏪",
+    "address": "Boulevard de la Liberté, Akwa, Douala",
+    "phone": "+237 233 42 56 78",
+    "hours": "8h00 - 21h00",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.5,
+    "coordinates": { "lat": 4.0511, "lng": 9.7679 }
+  },
+  {
+    "id": 2,
+    "name": "Casino Bonanjo",
+    "logo": "🎰",
+    "address": "Rue Joffre, Bonanjo, Douala",
+    "phone": "+237 233 42 67 89",
+    "hours": "7h30 - 22h00",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.3,
+    "coordinates": { "lat": 4.0483, "lng": 9.7043 }
+  }
+]
+,
+  {
+    "id": 3,
+    "name": "Carrefour Market",
+    "logo": "🛒",
+    "address": "Avenue Charles de Gaulle, Douala",
+    "phone": "+237 233 42 78 90",
+    "hours": "8h00 - 22h00",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.6,
+    "coordinates": { "lat": 4.0469, "lng": 9.7071 }
+  },
+  {
+    "id": 4,
+    "name": "Santa Lucia",
+    "logo": "⭐",
+    "address": "Rue de la Joie, Bonapriso, Douala",
+    "phone": "+237 233 42 89 01",
+    "hours": "7h00 - 21h30",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.4,
+    "coordinates": { "lat": 4.0556, "lng": 9.7125 }
+  },
+  {
+    "id": 5,
+    "name": "Score Supermarché",
+    "logo": "🏆",
+    "address": "Boulevard de la République, Douala",
+    "phone": "+237 233 42 90 12",
+    "hours": "8h00 - 21h00",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.2,
+    "coordinates": { "lat": 4.0489, "lng": 9.7098 }
+  },
+  {
+    "id": 6,
+    "name": "Orca Deco",
+    "logo": "🐋",
+    "address": "Rue Franqueville, Akwa, Douala",
+    "phone": "+237 233 43 01 23",
+    "hours": "8h30 - 21h30",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.3,
+    "coordinates": { "lat": 4.0502, "lng": 9.7654 }
+  },
+  {
+    "id": 7,
+    "name": "Leader Price",
+    "logo": "💰",
+    "address": "Avenue Ahidjo, Douala",
+    "phone": "+237 233 43 12 34",
+    "hours": "7h30 - 22h00",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.1,
+    "coordinates": { "lat": 4.0478, "lng": 9.7112 }
+  },
+  {
+    "id": 8,
+    "name": "Super U Douala",
+    "logo": "🅿️",
+    "address": "Carrefour Ndokoti, Douala",
+    "phone": "+237 233 43 23 45",
+    "hours": "8h00 - 21h00",
+    "delivery": true,
+    "deliveryFee": 500,
+    "minOrder": 5000,
+    "rating": 4.4,
+    "coordinates": { "lat": 4.0445, "lng": 9.7189 }
+  }
+]

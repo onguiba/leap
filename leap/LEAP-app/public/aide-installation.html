@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide Installation PriceCheck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .step-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .step-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .platform {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .platform-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        
+        .install-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            width: 100%;
+            margin: 20px 0;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .emoji {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+            color: #555;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">📱</div>
+        <h1>Installer PriceCheck</h1>
+        <p class="subtitle">Guide d'installation étape par étape</p>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">1</span>
+                Vous êtes sur la bonne page!
+            </div>
+            <div class="step-content">
+                Vous voyez cette page, donc votre téléphone est bien connecté au serveur. Parfait! 🎉
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">2</span>
+                Retournez à la page d'accueil
+            </div>
+            <div class="step-content">
+                <button class="install-btn" onclick="window.location.href='/'">
+                    🏠 Aller à la page d'accueil
+                </button>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">3</span>
+                Installez l'application
+            </div>
+            <div class="step-content">
+                <div class="platform">
+                    <div class="platform-title">📱 Sur Android (Chrome):</div>
+                    <ul>
+                        <li>Appuyez sur les <span class="highlight">3 points</span> (⋮) en haut à droite</li>
+                        <li>Cherchez <span class="highlight">"Ajouter à l'écran d'accueil"</span></li>
+                        <li>Ou <span class="highlight">"Installer l'application"</span></li>
+                        <li>Appuyez dessus et confirmez</li>
+                    </ul>
+                </div>
+                
+                <div class="platform">
+                    <div class="platform-title">🍎 Sur iPhone (Safari):</div>
+                    <ul>
+                        <li>Appuyez sur le bouton <span class="highlight">Partager</span> (⎙) en bas</li>
+                        <li>Faites défiler vers le bas</li>
+                        <li>Appuyez sur <span class="highlight">"Sur l'écran d'accueil"</span></li>
+                        <li>Appuyez sur <span class="highlight">"Ajouter"</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">4</span>
+                C'est installé!
+            </div>
+            <div class="step-content">
+                L'icône <strong>PriceCheck</strong> apparaît maintenant sur votre écran d'accueil. Appuyez dessus pour lancer l'application!
+            </div>
+        </div>
+        
+        <div class="success">
+            ✅ L'application fonctionne comme une vraie app native!<br>
+            Scanner, panier, notifications, tout est disponible!
+        </div>
+    </div>
+    
+    <script>
+        // Détecter si déjà installé
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            document.querySelector('.success').innerHTML = '✅ Application déjà installée!<br>Vous utilisez PriceCheck en mode app!';
+        }
+    </script>
+</body>
+</html>

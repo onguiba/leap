@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scanner - MALAP METSI</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="scanner-app"></div>
+  <script type="module">
+    import './scanner.ts';
+    import { initScanner } from './scanner.ts';
+
+    document.querySelector('#scanner-app').innerHTML = `
+      <div class="container scanner-container">
+        <header class="header-simple">
+          <button class="back-btn">← Retour</button>
+          <div class="logo">
+            <span class="logo-icon">📊</span>
+            <span class="logo-text">MALAP METSI</span>
+          </div>
+          <div></div>
+        </header>
+
+        <main class="scanner-page">
+          <div class="scanner-intro">
+            <h1>Scanner de code-barres</h1>
+            <p>Scannez le code-barres d'un produit pour comparer les prix dans les magasins autour de vous</p>
+          </div>
+
+          <div class="scanner-section hidden">
+            <div id="scanner-video" class="scanner-viewport"></div>
+            <div class="scanner-overlay">
+              <div class="scan-line"></div>
+              <p class="scan-instruction">Placez le code-barres dans le cadre</p>
+            </div>
+            <div class="scanner-error"></div>
+          </div>
+
+          <div class="scanner-controls">
+            <button class="start-scan-btn">
+              📷 Démarrer le scan
+            </button>
+            
+            <div class="manual-input-section">
+              <p class="or-divider">ou</p>
+              <div class="manual-input-group">
+                <input 
+                  type="text" 
+                  class="manual-barcode-input" 
+                  placeholder="Entrez le code-barres manuellement"
+                />
+                <button class="manual-search-btn">Rechercher</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="scan-results hidden">
+            <div class="result-header">
+              <h2 class="scanned-product-name">Lait Entier Bio 1L</h2>
+              <button class="scan-again-btn">Scanner un autre produit</button>
+            </div>
+
+            <div class="current-store-card">
+              <div class="current-store-badge">Vous êtes ici</div>
+              <h3 class="current-store-name">Carrefour Akwa</h3>
+              <div class="current-price">2 500 FCFA</div>
+            </div>
+
+            <div class="comparison-section">
+              <h3>Comparez avec d'autres magasins</h3>
+              <div class="comparison-stores-list"></div>
+            </div>
+          </div>
+
+          <div class="scanner-tips">
+            <h3>💡 Conseils pour un scan réussi</h3>
+            <ul>
+              <li>Assurez-vous d'avoir un bon éclairage</li>
+              <li>Tenez votre téléphone stable</li>
+              <li>Placez le code-barres bien droit dans le cadre</li>
+              <li>Évitez les reflets sur l'emballage</li>
+            </ul>
+          </div>
+        </main>
+      </div>
+    `;
+
+    initScanner();
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+═══════════════════════════════════════════════════════════════
+  INSTALLER PRICECHECK SUR VOTRE TELEPHONE - GUIDE RAPIDE
+═══════════════════════════════════════════════════════════════
+
+✅ CONFIGURATION TERMINEE!
+
+Votre application est maintenant configurée avec Capacitor.
+Le projet Android est créé dans: leap/LEAP-app/android/
+
+═══════════════════════════════════════════════════════════════
+  OPTION 1: INSTALLATION DIRECTE (PLUS RAPIDE)
+═══════════════════════════════════════════════════════════════
+
+Prérequis:
+1. Installez Android Studio: https://developer.android.com/studio
+2. Connectez votre téléphone en USB
+3. Activez le "Mode Développeur" sur votre téléphone:
+   - Paramètres → À propos du téléphone
+   - Appuyez 7 fois sur "Numéro de build"
+   - Retour → Options de développement
+   - Activez "Débogage USB"
+
+Installation:
+Dans le terminal, depuis leap/LEAP-app:
+
+    npx cap run android
+
+Cela va:
+✓ Compiler l'application
+✓ Générer l'APK
+✓ L'installer automatiquement sur votre téléphone
+✓ Lancer l'application
+
+Temps: 3-5 minutes
+
+═══════════════════════════════════════════════════════════════
+  OPTION 2: GENERER UN FICHIER APK
+═══════════════════════════════════════════════════════════════
+
+Étape 1: Installer Android Studio
+- Téléchargez: https://developer.android.com/studio
+- Installez (suivez les instructions)
+- Temps: 15-20 minutes
+
+Étape 2: Ouvrir le projet
+Dans le terminal, depuis leap/LEAP-app:
+
+    npx cap open android
+
+Étape 3: Générer l'APK
+Dans Android Studio:
+- Menu Build → Build Bundle(s) / APK(s) → Build APK(s)
+- Attendez la compilation (2-5 minutes)
+- Cliquez sur "locate" pour trouver l'APK
+
+Étape 4: Installer l'APK
+L'APK est dans:
+    leap/LEAP-app/android/app/build/outputs/apk/debug/app-debug.apk
+
+Copiez ce fichier sur votre téléphone et ouvrez-le pour l'installer.
+
+═══════════════════════════════════════════════════════════════
+  OPTION 3: PWA (DEJA DISPONIBLE)
+═══════════════════════════════════════════════════════════════
+
+Votre application fonctionne déjà comme PWA!
+
+Sur votre téléphone:
+1. Ouvrez Chrome (Android) ou Safari (iPhone)
+2. Allez sur: http://192.168.1.96:5174
+3. Menu → "Ajouter à l'écran d'accueil"
+4. L'app est installée!
+
+Avantages:
+✓ Installation immédiate (30 secondes)
+✓ Mises à jour automatiques
+✓ Fonctionne comme une app native
+✓ Pas besoin de Google Play Store
+
+═══════════════════════════════════════════════════════════════
+  FICHIERS CREES
+═══════════════════════════════════════════════════════════════
+
+✓ capacitor.config.ts - Configuration Capacitor
+✓ android/ - Projet Android natif
+✓ INSTALLATION_APK_SIMPLE.md - Guide détaillé
+✓ BUILD_APK.md - Guide avancé
+✓ check-android-setup.ps1 - Script de vérification
+
+═══════════════════════════════════════════════════════════════
+  COMMANDES UTILES
+═══════════════════════════════════════════════════════════════
+
+Compiler l'application web:
+    npm run build
+
+Synchroniser avec Android:
+    npx cap sync
+
+Ouvrir dans Android Studio:
+    npx cap open android
+
+Installer directement sur téléphone:
+    npx cap run android
+
+Vérifier l'environnement:
+    powershell -ExecutionPolicy Bypass -File check-android-setup.ps1
+
+═══════════════════════════════════════════════════════════════
+  RECOMMANDATION
+═══════════════════════════════════════════════════════════════
+
+Pour tester rapidement:
+→ Utilisez OPTION 3 (PWA) - 30 secondes
+
+Pour une vraie app native:
+→ Utilisez OPTION 1 (Installation directe) - 5 minutes
+
+Pour distribuer l'APK:
+→ Utilisez OPTION 2 (Générer APK) - 20 minutes
+
+═══════════════════════════════════════════════════════════════
+  BESOIN D'AIDE?
+═══════════════════════════════════════════════════════════════
+
+Consultez les guides détaillés:
+- INSTALLATION_APK_SIMPLE.md (guide pas à pas)
+- BUILD_APK.md (guide complet avec dépannage)
+
+Documentation Capacitor:
+https://capacitorjs.com/docs
+
+═══════════════════════════════════════════════════════════════
+
+Votre application est prête à être installée sur téléphone! 🎉📱

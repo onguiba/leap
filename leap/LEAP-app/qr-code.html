@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner pour Installer PriceCheck</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            color: #333;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            display: inline-block;
+        }
+        
+        #qrcode {
+            margin: 0 auto;
+        }
+        
+        .instructions {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+        
+        .step {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .url {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 16px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        
+        .emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">📱</div>
+        <h1>Installer PriceCheck</h1>
+        <p style="font-size: 18px; color: #666;">Scannez ce QR code avec votre téléphone</p>
+        
+        <div class="qr-container">
+            <div id="qrcode"></div>
+        </div>
+        
+        <div class="instructions">
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Ouvrez l'appareil photo</strong> de votre téléphone
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Scannez le QR code</strong> ci-dessus
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Appuyez sur la notification</strong> qui apparaît
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Installez l'application</strong> sur votre écran d'accueil
+            </div>
+        </div>
+        
+        <p style="margin-top: 30px; color: #666;">Ou tapez cette adresse dans votre navigateur:</p>
+        <div class="url">http://192.168.1.96:5174</div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Générer le QR code
+        new QRCode(document.getElementById("qrcode"), {
+            text: "http://192.168.1.96:5174",
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+</html>

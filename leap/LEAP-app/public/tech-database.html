@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Technologies & Base de Données — PriceCheck</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;font-size:10pt;line-height:1.6;}
+.page{max-width:210mm;margin:0 auto;background:white;}
+
+/* COVER */
+.cover{
+  height:100vh;display:flex;flex-direction:column;
+  background:linear-gradient(145deg,#0f172a 0%,#1e293b 45%,#0a2e1a 100%);
+  color:white;padding:64px 72px;position:relative;overflow:hidden;
+  page-break-after:always;
+}
+.cover::after{
+  content:'';position:absolute;bottom:-120px;left:-80px;
+  width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,196,113,0.12) 0%,transparent 70%);
+}
+.cover::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(249,115,22,0.08) 0%,transparent 70%);
+}
+.cover-top{display:flex;align-items:center;gap:14px;margin-bottom:auto;}
+.logo-box{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,#00c471,#00a85e);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;box-shadow:0 8px 20px rgba(0,196,113,0.35);
+}
+.logo-name{font-size:22px;font-weight:900;letter-spacing:-0.5px;}
+.logo-name em{color:#f97316;font-style:normal;}
+.logo-tag{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;}
+.cover-center{flex:1;display:flex;flex-direction:column;justify-content:center;padding:40px 0;}
+.cover-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,196,113,0.15);border:1px solid rgba(0,196,113,0.35);
+  color:#4ade80;padding:6px 16px;border-radius:100px;
+  font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:22px;width:fit-content;
+}
+.cover-h1{font-size:48px;font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:18px;}
+.cover-h1 span{color:#00c471;}
+.cover-desc{font-size:14px;color:rgba(255,255,255,0.6);max-width:440px;line-height:1.75;}
+.cover-bottom{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;margin-top:40px;
+}
+.cover-meta{padding:0 20px 0 0;}
+.cover-meta:first-child{padding-left:0;}
+.cover-meta label{font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);display:block;margin-bottom:4px;}
+.cover-meta span{font-size:13px;font-weight:700;}
+
+/* SECTION */
+.content{padding:52px 72px;}
+.sec{margin-bottom:44px;page-break-inside:avoid;}
+.sec-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #f1f5f9;}
+.sec-num{
+  min-width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,#00c471,#00a85e);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:14px;font-weight:800;
+}
+.sec-label{font-size:17px;font-weight:800;color:#0f172a;}
+.sec-sub{font-size:10px;color:#64748b;margin-top:2px;}
+
+/* TECH CARDS */
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.tech-card{
+  border-radius:14px;padding:18px;border:1.5px solid #e2e8f0;
+  background:#fafafa;position:relative;overflow:hidden;
+  transition:all .2s;
+}
+.tech-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.tech-card.green::before{background:linear-gradient(90deg,#00c471,#00a85e);}
+.tech-card.blue::before{background:linear-gradient(90deg,#1a73e8,#1557b0);}
+.tech-card.orange::before{background:linear-gradient(90deg,#f97316,#ea580c);}
+.tech-card.purple::before{background:linear-gradient(90deg,#8b5cf6,#7c3aed);}
+.tech-card.red::before{background:linear-gradient(90deg,#ef4444,#dc2626);}
+.tech-card.teal::before{background:linear-gradient(90deg,#14b8a6,#0d9488);}
+.tech-icon{font-size:26px;margin-bottom:10px;display:block;}
+.tech-name{font-size:12px;font-weight:800;color:#0f172a;margin-bottom:3px;}
+.tech-version{
+  display:inline-block;font-size:8px;font-weight:700;
+  background:#e6f9f1;color:#065f46;border-radius:100px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.tech-desc{font-size:9pt;color:#475569;line-height:1.55;}
+.tech-role{
+  margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;
+  font-size:8.5pt;color:#94a3b8;font-style:italic;
+}
+
+/* LANG TABLE */
+.lang-table{width:100%;border-collapse:collapse;font-size:9.5pt;}
+.lang-table thead tr{background:#0f172a;}
+.lang-table th{
+  color:white;padding:11px 16px;text-align:left;
+  font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;
+}
+.lang-table th:first-child{border-radius:10px 0 0 0;}
+.lang-table th:last-child{border-radius:0 10px 0 0;}
+.lang-table td{padding:10px 16px;border-bottom:1px solid #f1f5f9;color:#334155;vertical-align:top;}
+.lang-table tr:nth-child(even) td{background:#f8fafc;}
+.lang-table tr:last-child td{border-bottom:none;}
+.pill{
+  display:inline-block;padding:2px 9px;border-radius:100px;
+  font-size:8px;font-weight:700;white-space:nowrap;
+}
+.pill-green{background:#dcfce7;color:#166534;}
+.pill-blue{background:#dbeafe;color:#1e40af;}
+.pill-orange{background:#ffedd5;color:#9a3412;}
+.pill-purple{background:#ede9fe;color:#5b21b6;}
+.pill-gray{background:#f1f5f9;color:#475569;}
+code{
+  font-family:'JetBrains Mono',monospace;font-size:8.5pt;
+  background:#f1f5f9;padding:1px 6px;border-radius:4px;color:#0f172a;
+}
+
+/* DB SECTION */
+.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.db-card{
+  border-radius:14px;border:1.5px solid #e2e8f0;overflow:hidden;
+}
+.db-card-head{
+  padding:14px 18px;font-size:11px;font-weight:800;
+  display:flex;align-items:center;gap:8px;
+}
+.db-card-head.green{background:linear-gradient(135deg,#e6f9f1,#d1fae5);color:#065f46;}
+.db-card-head.blue{background:linear-gradient(135deg,#eff6ff,#dbeafe);color:#1e40af;}
+.db-card-head.orange{background:linear-gradient(135deg,#fff7ed,#ffedd5);color:#9a3412;}
+.db-card-head.purple{background:linear-gradient(135deg,#faf5ff,#ede9fe);color:#5b21b6;}
+.db-card-body{padding:14px 18px;background:#fafafa;}
+.db-field{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid #f1f5f9;font-size:9pt;
+}
+.db-field:last-child{border-bottom:none;}
+.db-field-name{color:#334155;font-weight:600;}
+.db-field-type{color:#94a3b8;font-family:'JetBrains Mono',monospace;font-size:8pt;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  border-radius:12px;padding:16px;text-align:center;color:white;
+}
+.stat .n{font-size:24px;font-weight:900;color:#00c471;line-height:1;}
+.stat .l{font-size:8px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;}
+
+/* PRODUCT TABLE */
+.prod-table{width:100%;border-collapse:collapse;font-size:8.5pt;margin-top:12px;}
+.prod-table th{background:#1e293b;color:white;padding:9px 12px;text-align:left;font-size:8px;text-transform:uppercase;letter-spacing:0.07em;}
+.prod-table th:first-child{border-radius:8px 0 0 0;}
+.prod-table th:last-child{border-radius:0 8px 0 0;}
+.prod-table td{padding:8px 12px;border-bottom:1px solid #f1f5f9;color:#334155;}
+.prod-table tr:nth-child(even) td{background:#f8fafc;}
+.prod-table tr:last-child td{border-bottom:none;}
+.cat-pill{display:inline-block;padding:2px 7px;border-radius:100px;font-size:7.5px;font-weight:700;}
+
+/* CITY TABLE */
+.city-table{width:100%;border-collapse:collapse;font-size:9pt;margin-top:12px;}
+.city-table th{background:#0f172a;color:white;padding:10px 14px;text-align:left;font-size:8px;text-transform:uppercase;letter-spacing:0.07em;}
+.city-table th:first-child{border-radius:8px 0 0 0;}
+.city-table th:last-child{border-radius:0 8px 0 0;}
+.city-table td{padding:9px 14px;border-bottom:1px solid #f1f5f9;color:#334155;}
+.city-table tr:nth-child(even) td{background:#f8fafc;}
+.city-table tr:last-child td{border-bottom:none;}
+
+/* FOOTER */
+.doc-footer{
+  margin-top:48px;padding-top:18px;border-top:1px solid #e2e8f0;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:8pt;color:#94a3b8;
+}
+
+/* PAGE BREAK */
+.pb{page-break-before:always;padding-top:52px;}
+
+/* PRINT */
+@media print{
+  body{background:white;}
+  .no-print{display:none!important;}
+  .pb{page-break-before:always;}
+  .sec{page-break-inside:avoid;}
+  @page{margin:0;size:A4;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="logo-box">🔍</div>
+    <div>
+      <div class="logo-name">Price<em>Check</em></div>
+      <div class="logo-tag">Comparez. Économisez. Achetez.</div>
+    </div>
+  </div>
+  <div class="cover-center">
+    <div class="cover-chip">📄 Document Technique</div>
+    <h1 class="cover-h1">Technologies,<br>Langages &<br><span>Base de Données</span></h1>
+    <p class="cover-desc">
+      Inventaire complet de la stack technique utilisée dans PriceCheck —
+      langages, frameworks, bibliothèques, APIs et structure de la base de données produits/magasins.
+    </p>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta"><label>Projet</label><span>PriceCheck v2.4</span></div>
+    <div class="cover-meta"><label>Type</label><span>PWA / SPA TypeScript</span></div>
+    <div class="cover-meta"><label>Date</label><span>Mars 2026</span></div>
+  </div>
+</div>
+
+<!-- PAGE 1 CONTENT -->
+<div class="content">
+
+  <!-- SECTION 1 : LANGAGES -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div>
+        <div class="sec-label">Langages de Programmation</div>
+        <div class="sec-sub">Langages utilisés dans le projet et leur rôle</div>
+      </div>
+    </div>
+    <table class="lang-table">
+      <thead>
+        <tr>
+          <th>Langage</th>
+          <th>Version</th>
+          <th>Rôle dans le projet</th>
+          <th>Fichiers concernés</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TypeScript</strong></td>
+          <td><span class="pill pill-blue">5.9.3</span></td>
+          <td>Langage principal — logique métier, routeur, composants, base de données, authentification</td>
+          <td><code>*.ts</code> (17 fichiers)</td>
+          <td><span class="pill pill-green">Compilé</span></td>
+        </tr>
+        <tr>
+          <td><strong>JavaScript</strong></td>
+          <td><span class="pill pill-orange">ES2022</span></td>
+          <td>Sortie de compilation TypeScript — exécuté dans le navigateur via Vite</td>
+          <td><code>dist/*.js</code></td>
+          <td><span class="pill pill-gray">Généré</span></td>
+        </tr>
+        <tr>
+          <td><strong>HTML5</strong></td>
+          <td><span class="pill pill-orange">HTML5</span></td>
+          <td>Structure de l'application — point d'entrée <code>index.html</code>, templates injectés dynamiquement via TypeScript</td>
+          <td><code>index.html</code>, templates dans <code>*.ts</code></td>
+          <td><span class="pill pill-green">Natif</span></td>
+        </tr>
+        <tr>
+          <td><strong>CSS3</strong></td>
+          <td><span class="pill pill-purple">CSS3</span></td>
+          <td>Design system complet — variables CSS, Grid, Flexbox, animations, responsive design, composants UI</td>
+          <td><code>src/style.css</code> (~900 lignes)</td>
+          <td><span class="pill pill-green">Natif</span></td>
+        </tr>
+        <tr>
+          <td><strong>JSON</strong></td>
+          <td><span class="pill pill-gray">—</span></td>
+          <td>Configuration Vite, TypeScript, manifest PWA, données statiques (orders, products, stores, users)</td>
+          <td><code>package.json</code>, <code>tsconfig.json</code>, <code>manifest.json</code>, <code>database/*.json</code></td>
+          <td><span class="pill pill-gray">Config / Data</span></td>
+        </tr>
+        <tr>
+          <td><strong>SQL</strong></td>
+          <td><span class="pill pill-gray">—</span></td>
+          <td>Schéma relationnel de référence et données de seed — documentation de la structure de données (non utilisé en production)</td>
+          <td><code>database/schema.sql</code>, <code>database/seed.sql</code></td>
+          <td><span class="pill pill-gray">Documentation</span></td>
+        </tr>
+        <tr>
+          <td><strong>SVG</strong></td>
+          <td><span class="pill pill-gray">—</span></td>
+          <td>Logo PriceCheck vectoriel — magnifying glass, panier, tag FCFA, graphique, texte "PriceCheck"</td>
+          <td><code>public/logo.svg</code></td>
+          <td><span class="pill pill-green">Natif</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 2 : FRAMEWORKS & OUTILS -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div>
+        <div class="sec-label">Frameworks, Outils & Build</div>
+        <div class="sec-sub">Environnement de développement et outils de build</div>
+      </div>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card green">
+        <span class="tech-icon">⚡</span>
+        <div class="tech-name">Vite</div>
+        <div class="tech-version">v8.0.0-beta.14</div>
+        <div class="tech-desc">Bundler et serveur de développement ultra-rapide. Hot Module Replacement (HMR), build optimisé avec tree-shaking, support natif TypeScript et ES Modules.</div>
+        <div class="tech-role">Commandes : <code>vite</code> (dev), <code>tsc && vite build</code> (prod)</div>
+      </div>
+      <div class="tech-card blue">
+        <span class="tech-icon">🔷</span>
+        <div class="tech-name">TypeScript Compiler</div>
+        <div class="tech-version">tsc ~5.9.3</div>
+        <div class="tech-desc">Compilateur TypeScript — vérification de types statique, transpilation vers ES2022, configuration via <code>tsconfig.json</code> avec mode strict.</div>
+        <div class="tech-role">Config : <code>target: ES2020</code>, <code>moduleResolution: bundler</code></div>
+      </div>
+      <div class="tech-card orange">
+        <span class="tech-icon">📦</span>
+        <div class="tech-name">npm</div>
+        <div class="tech-version">Node Package Manager</div>
+        <div class="tech-desc">Gestionnaire de paquets — installation des dépendances, exécution des scripts de build et de développement.</div>
+        <div class="tech-role">Scripts : <code>dev</code>, <code>build</code>, <code>preview</code></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end content page 1 -->
+
+<!-- PAGE 2 -->
+<div class="content pb">
+
+  <!-- SECTION 3 : BIBLIOTHÈQUES -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div>
+        <div class="sec-label">Bibliothèques Externes</div>
+        <div class="sec-sub">Dépendances npm et CDN utilisées dans l'application</div>
+      </div>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card blue">
+        <span class="tech-icon">🗺️</span>
+        <div class="tech-name">Leaflet.js</div>
+        <div class="tech-version">v1.9.4 — CDN</div>
+        <div class="tech-desc">Bibliothèque de cartographie interactive open-source. Affiche la carte de suivi de livraison avec marqueurs animés (livreur + destination), ligne de route et zoom.</div>
+        <div class="tech-role">Chargé dynamiquement via <code>unpkg.com</code> dans <code>tracking.ts</code></div>
+      </div>
+      <div class="tech-card teal">
+        <span class="tech-icon">🌍</span>
+        <div class="tech-name">OpenStreetMap</div>
+        <div class="tech-version">Tuiles gratuites</div>
+        <div class="tech-desc">Fournisseur de tuiles cartographiques open-source. Aucune clé API requise. Utilisé comme fond de carte dans Leaflet. Couverture mondiale incluant le Cameroun.</div>
+        <div class="tech-role">URL : <code>{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code></div>
+      </div>
+      <div class="tech-card orange">
+        <span class="tech-icon">📷</span>
+        <div class="tech-name">QuaggaJS</div>
+        <div class="tech-version">v0.12.1 — npm</div>
+        <div class="tech-desc">Bibliothèque de lecture de codes-barres en JavaScript pur. Supporte EAN-13, EAN-8, Code128, UPC. Fonctionne avec le flux caméra ou une image statique.</div>
+        <div class="tech-role">Utilisé dans <code>scanner.ts</code> — seule dépendance npm de production</div>
+      </div>
+      <div class="tech-card purple">
+        <span class="tech-icon">🔤</span>
+        <div class="tech-name">Inter (Google Fonts)</div>
+        <div class="tech-version">Variable font</div>
+        <div class="tech-desc">Police typographique premium utilisée dans tout le design system. Poids 400 à 900. Optimisée pour les interfaces numériques, excellente lisibilité sur mobile.</div>
+        <div class="tech-role">Importée via <code>@import url(fonts.googleapis.com)</code> dans <code>style.css</code></div>
+      </div>
+      <div class="tech-card green">
+        <span class="tech-icon">🖼️</span>
+        <div class="tech-name">UI Avatars API</div>
+        <div class="tech-version">API gratuite</div>
+        <div class="tech-desc">Génération d'avatars utilisateur à partir du nom. Utilisé dans la page profil et la carte livreur dans le suivi de commande.</div>
+        <div class="tech-role">URL : <code>ui-avatars.com/api/?name=…&background=00c471</code></div>
+      </div>
+      <div class="tech-card red">
+        <span class="tech-icon">📲</span>
+        <div class="tech-name">Web App Manifest</div>
+        <div class="tech-version">PWA Standard</div>
+        <div class="tech-desc">Fichier <code>manifest.json</code> permettant l'installation de l'application sur mobile comme une app native, sans passer par un store d'applications.</div>
+        <div class="tech-role">Fichier : <code>public/manifest.json</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 : APIs NAVIGATEUR -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <div>
+        <div class="sec-label">APIs Navigateur Natives</div>
+        <div class="sec-sub">APIs Web standards utilisées sans dépendance externe</div>
+      </div>
+    </div>
+    <table class="lang-table">
+      <thead>
+        <tr><th>API</th><th>Utilisation dans PriceCheck</th><th>Fichier</th><th>Statut</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>localStorage</strong></td>
+          <td>Session utilisateur (<code>pc_session</code>), profil (<code>pc_user</code>), panier (<code>selectedStore</code>), commande (<code>currentOrder</code>), facture (<code>invoice</code>)</td>
+          <td><code>auth.ts</code>, <code>cart.ts</code>, <code>checkout.ts</code></td>
+          <td><span class="pill pill-green">Actif</span></td>
+        </tr>
+        <tr>
+          <td><strong>Geolocation API</strong></td>
+          <td>Récupération de la position GPS réelle de l'utilisateur pour centrer la carte de suivi et simuler la position du livreur à proximité</td>
+          <td><code>tracking.ts</code></td>
+          <td><span class="pill pill-green">Actif</span></td>
+        </tr>
+        <tr>
+          <td><strong>MediaDevices API</strong></td>
+          <td>Accès à la caméra du téléphone pour le scanner de codes-barres (<code>getUserMedia</code>)</td>
+          <td><code>scanner.ts</code></td>
+          <td><span class="pill pill-green">Actif</span></td>
+        </tr>
+        <tr>
+          <td><strong>CustomEvent API</strong></td>
+          <td>Événement <code>cityChanged</code> dispatché lors du changement de ville — déclenche le re-rendu des produits filtrés</td>
+          <td><code>city-selector.ts</code>, <code>home.ts</code></td>
+          <td><span class="pill pill-green">Actif</span></td>
+        </tr>
+        <tr>
+          <td><strong>BeforeInstallPrompt</strong></td>
+          <td>Capture du prompt d'installation PWA natif du navigateur pour afficher un bouton d'installation personnalisé</td>
+          <td><code>pwa-install.ts</code></td>
+          <td><span class="pill pill-blue">PWA</span></td>
+        </tr>
+        <tr>
+          <td><strong>setInterval / clearInterval</strong></td>
+          <td>Animation du marqueur livreur sur la carte — déplacement progressif toutes les 2 secondes vers la destination</td>
+          <td><code>tracking.ts</code></td>
+          <td><span class="pill pill-green">Actif</span></td>
+        </tr>
+        <tr>
+          <td><strong>FileReader / File API</strong></td>
+          <td>Lecture d'une image depuis la galerie photo pour analyse du code-barres sans caméra</td>
+          <td><code>scanner.ts</code></td>
+          <td><span class="pill pill-green">Actif</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- end page 2 -->
+
+<!-- PAGE 3 : BASE DE DONNÉES -->
+<div class="content pb">
+
+  <!-- SECTION 5 : STRUCTURE BDD -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">5</div>
+      <div>
+        <div class="sec-label">Structure de la Base de Données</div>
+        <div class="sec-sub">Modèles de données TypeScript — interfaces et champs</div>
+      </div>
+    </div>
+    <p style="color:#475569;margin-bottom:16px;font-size:9.5pt;">
+      La base de données est entièrement statique, définie en TypeScript dans <code>src/database.ts</code>.
+      Aucun backend ni serveur de base de données n'est requis — toutes les données sont embarquées dans le bundle.
+    </p>
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="db-card-head green">📦 Interface <code>Product</code></div>
+        <div class="db-card-body">
+          <div class="db-field"><span class="db-field-name">id</span><span class="db-field-type">number</span></div>
+          <div class="db-field"><span class="db-field-name">name</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">image</span><span class="db-field-type">string (emoji)</span></div>
+          <div class="db-field"><span class="db-field-name">category</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">barcode</span><span class="db-field-type">string (EAN-13)</span></div>
+          <div class="db-field"><span class="db-field-name">description</span><span class="db-field-type">string? (optionnel)</span></div>
+          <div class="db-field"><span class="db-field-name">prices</span><span class="db-field-type">Array&lt;PriceEntry&gt;</span></div>
+          <div class="db-field" style="padding-left:16px;background:#f8fafc;"><span class="db-field-name" style="color:#64748b;">↳ store</span><span class="db-field-type">string</span></div>
+          <div class="db-field" style="padding-left:16px;background:#f8fafc;"><span class="db-field-name" style="color:#64748b;">↳ price</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field" style="padding-left:16px;background:#f8fafc;border-bottom:none;"><span class="db-field-name" style="color:#64748b;">↳ stock</span><span class="db-field-type">number? (optionnel)</span></div>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-head blue">🏪 Interface <code>Store</code></div>
+        <div class="db-card-body">
+          <div class="db-field"><span class="db-field-name">id</span><span class="db-field-type">number</span></div>
+          <div class="db-field"><span class="db-field-name">name</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">logo</span><span class="db-field-type">string (emoji)</span></div>
+          <div class="db-field"><span class="db-field-name">city</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">address</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">phone</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">hours</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">delivery</span><span class="db-field-type">boolean</span></div>
+          <div class="db-field"><span class="db-field-name">deliveryFee</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field"><span class="db-field-name">minOrder</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field"><span class="db-field-name">rating</span><span class="db-field-type">number (0–5)</span></div>
+          <div class="db-field" style="border-bottom:none;"><span class="db-field-name">coordinates</span><span class="db-field-type">&#123; lat, lng &#125;</span></div>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-head orange">👤 Interface <code>User</code></div>
+        <div class="db-card-body">
+          <div class="db-field"><span class="db-field-name">id</span><span class="db-field-type">number</span></div>
+          <div class="db-field"><span class="db-field-name">name</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">email</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">phone</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">address</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">walletBalance</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field"><span class="db-field-name">loyaltyPoints</span><span class="db-field-type">number</span></div>
+          <div class="db-field"><span class="db-field-name">loyaltyLevel</span><span class="db-field-type">'Bronze'|'Gold'|'Platinum'</span></div>
+          <div class="db-field"><span class="db-field-name">createdAt</span><span class="db-field-type">string (ISO date)</span></div>
+          <div class="db-field" style="border-bottom:none;"><span class="db-field-name">orders</span><span class="db-field-type">string[] (IDs)</span></div>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-head purple">📋 Interface <code>Order</code></div>
+        <div class="db-card-body">
+          <div class="db-field"><span class="db-field-name">id</span><span class="db-field-type">string (PC-XXXXXX)</span></div>
+          <div class="db-field"><span class="db-field-name">userId</span><span class="db-field-type">number</span></div>
+          <div class="db-field"><span class="db-field-name">date</span><span class="db-field-type">string (ISO date)</span></div>
+          <div class="db-field"><span class="db-field-name">status</span><span class="db-field-type">'pending'|'confirmed'|'preparing'|'delivering'|'delivered'</span></div>
+          <div class="db-field"><span class="db-field-name">items</span><span class="db-field-type">Array&lt;OrderItem&gt;</span></div>
+          <div class="db-field"><span class="db-field-name">subtotal</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field"><span class="db-field-name">deliveryFee</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field"><span class="db-field-name">total</span><span class="db-field-type">number (FCFA)</span></div>
+          <div class="db-field"><span class="db-field-name">paymentMethod</span><span class="db-field-type">string</span></div>
+          <div class="db-field"><span class="db-field-name">deliveryAddress</span><span class="db-field-type">string</span></div>
+          <div class="db-field" style="border-bottom:none;"><span class="db-field-name">deliveryDriver</span><span class="db-field-type">&#123; name, phone, vehicle, rating &#125;?</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page 3 -->
+
+<!-- PAGE 4 : CATALOGUE PRODUITS -->
+<div class="content pb">
+
+  <!-- SECTION 6 : PRODUITS -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">6</div>
+      <div>
+        <div class="sec-label">Catalogue Produits</div>
+        <div class="sec-sub">45 produits avec codes-barres EAN-13 réels camerounais</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="n">45</div><div class="l">Produits total</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">Catégories</div></div>
+      <div class="stat"><div class="n">EAN-13</div><div class="l">Format codes-barres</div></div>
+      <div class="stat"><div class="n">FCFA</div><div class="l">Devise</div></div>
+    </div>
+    <table class="prod-table">
+      <thead>
+        <tr><th>#</th><th>Produit</th><th>Catégorie</th><th>Code-barres</th><th>Prix min</th><th>Prix max</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Lait Entier Bio 1L</td><td><span class="cat-pill" style="background:#e6f9f1;color:#065f46;">Laitier</span></td><td><code>3760074380534</code></td><td>2 100 F</td><td>2 350 F</td></tr>
+        <tr><td>2</td><td>Pain Complet 500g</td><td><span class="cat-pill" style="background:#fff7ed;color:#9a3412;">Boulangerie</span></td><td><code>3760074380535</code></td><td>1 400 F</td><td>1 500 F</td></tr>
+        <tr><td>3</td><td>Œufs Bio x12</td><td><span class="cat-pill" style="background:#e6f9f1;color:#065f46;">Frais</span></td><td><code>3760074380536</code></td><td>2 900 F</td><td>3 200 F</td></tr>
+        <tr><td>4</td><td>Huile d'Olive 1L</td><td><span class="cat-pill" style="background:#fffbeb;color:#92400e;">Épicerie</span></td><td><code>3760074380537</code></td><td>4 350 F</td><td>4 500 F</td></tr>
+        <tr><td>5</td><td>Riz Basmati 2kg</td><td><span class="cat-pill" style="background:#fffbeb;color:#92400e;">Épicerie</span></td><td><code>3760074380538</code></td><td>5 650 F</td><td>5 900 F</td></tr>
+        <tr><td>6</td><td>Poulet Fermier 1kg</td><td><span class="cat-pill" style="background:#fee2e2;color:#991b1b;">Viandes</span></td><td><code>3760074380539</code></td><td>8 200 F</td><td>8 700 F</td></tr>
+        <tr><td>7</td><td>Tomates 1kg</td><td><span class="cat-pill" style="background:#dcfce7;color:#166534;">Légumes</span></td><td><code>3760074380540</code></td><td>1 700 F</td><td>2 000 F</td></tr>
+        <tr><td>8</td><td>Bananes 1kg</td><td><span class="cat-pill" style="background:#dcfce7;color:#166534;">Légumes</span></td><td><code>3760074380541</code></td><td>1 300 F</td><td>1 500 F</td></tr>
+        <tr><td>9</td><td>Fromage Emmental 200g</td><td><span class="cat-pill" style="background:#e6f9f1;color:#065f46;">Laitier</span></td><td><code>3760074380542</code></td><td>3 450 F</td><td>3 600 F</td></tr>
+        <tr><td>10</td><td>Yaourt Nature x8</td><td><span class="cat-pill" style="background:#e6f9f1;color:#065f46;">Laitier</span></td><td><code>3760074380543</code></td><td>2 750 F</td><td>2 900 F</td></tr>
+        <tr><td>11–20</td><td>Pâtes, Sauce tomate, Café, Thé, Jus, Eau, Beurre, Sucre, Farine, Sel</td><td><span class="cat-pill" style="background:#fffbeb;color:#92400e;">Épicerie / Boissons</span></td><td><code>376007438054x</code></td><td>—</td><td>—</td></tr>
+        <tr><td>21–30</td><td>Poivre, Pommes de terre, Oignons, Carottes, Poisson, Crevettes, Bœuf, Saucisses, Chocolat, Biscuits</td><td><span class="cat-pill" style="background:#fee2e2;color:#991b1b;">Viandes / Poissons</span></td><td><code>376007438055x</code></td><td>—</td><td>—</td></tr>
+        <tr><td>31</td><td>Eau Tangui 1.5L ⭐</td><td><span class="cat-pill" style="background:#dbeafe;color:#1e40af;">Boissons 🇨🇲</span></td><td><code>6170001000016</code></td><td>450 F</td><td>550 F</td></tr>
+        <tr><td>32</td><td>Eau Supermont 1.5L ⭐</td><td><span class="cat-pill" style="background:#dbeafe;color:#1e40af;">Boissons 🇨🇲</span></td><td><code>6171100010018</code></td><td>550 F</td><td>620 F</td></tr>
+        <tr><td>33</td><td>Bière 33 Export 65cl ⭐</td><td><span class="cat-pill" style="background:#dbeafe;color:#1e40af;">Boissons 🇨🇲</span></td><td><code>6170001001013</code></td><td>650 F</td><td>700 F</td></tr>
+        <tr><td>34</td><td>Bière Castel Beer 65cl ⭐</td><td><span class="cat-pill" style="background:#dbeafe;color:#1e40af;">Boissons 🇨🇲</span></td><td><code>6170001001051</code></td><td>570 F</td><td>650 F</td></tr>
+        <tr><td>35</td><td>Top Orange 60cl ⭐</td><td><span class="cat-pill" style="background:#dbeafe;color:#1e40af;">Boissons 🇨🇲</span></td><td><code>6170001002010</code></td><td>400 F</td><td>450 F</td></tr>
+        <tr><td>36</td><td>Malta Guinness ⭐</td><td><span class="cat-pill" style="background:#dbeafe;color:#1e40af;">Boissons 🇨🇲</span></td><td><code>6170002001012</code></td><td>540 F</td><td>580 F</td></tr>
+        <tr><td>37</td><td>Bouillon Maggi Étoile 4g ⭐</td><td><span class="cat-pill" style="background:#fef9c3;color:#713f12;">Épicerie 🇨🇲</span></td><td><code>6173001000012</code></td><td>40 F</td><td>50 F</td></tr>
+        <tr><td>38</td><td>Huile Mayor 1L ⭐</td><td><span class="cat-pill" style="background:#fef9c3;color:#713f12;">Épicerie 🇨🇲</span></td><td><code>6171200010116</code></td><td>2 500 F</td><td>2 600 F</td></tr>
+        <tr><td>39</td><td>Yaourt Dolait ⭐</td><td><span class="cat-pill" style="background:#fef9c3;color:#713f12;">Épicerie 🇨🇲</span></td><td><code>6171300020014</code></td><td>300 F</td><td>320 F</td></tr>
+        <tr><td>40</td><td>Chocolat Mambo (Chococam) ⭐</td><td><span class="cat-pill" style="background:#fef9c3;color:#713f12;">Épicerie 🇨🇲</span></td><td><code>6171400030112</code></td><td>1 500 F</td><td>1 600 F</td></tr>
+        <tr><td>41</td><td>Sucre Sosucam ⭐</td><td><span class="cat-pill" style="background:#fef9c3;color:#713f12;">Épicerie 🇨🇲</span></td><td><code>6171500040011</code></td><td>1 150 F</td><td>1 250 F</td></tr>
+        <tr><td>42</td><td>Sardines Broli ⭐</td><td><span class="cat-pill" style="background:#fef9c3;color:#713f12;">Épicerie 🇨🇲</span></td><td><code>6171600050119</code></td><td>800 F</td><td>850 F</td></tr>
+        <tr><td>43</td><td>Savon Le Gars ⭐</td><td><span class="cat-pill" style="background:#f0fdf4;color:#166534;">Hygiène 🇨🇲</span></td><td><code>6171200010512</code></td><td>220 F</td><td>280 F</td></tr>
+        <tr><td>44</td><td>Savon Azur ⭐</td><td><span class="cat-pill" style="background:#f0fdf4;color:#166534;">Hygiène 🇨🇲</span></td><td><code>6171700060018</code></td><td>350 F</td><td>380 F</td></tr>
+        <tr><td>45</td><td>Détergent Madar ⭐</td><td><span class="cat-pill" style="background:#f0fdf4;color:#166534;">Hygiène 🇨🇲</span></td><td><code>6111234567890</code></td><td>120 F</td><td>180 F</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:8.5pt;color:#94a3b8;margin-top:8px;">⭐ = Produit camerounais avec code-barres EAN-13 réel</p>
+  </div>
+
+</div><!-- end page 4 -->
+
+<!-- PAGE 5 : MAGASINS PAR VILLE -->
+<div class="content pb">
+
+  <!-- SECTION 7 : MAGASINS -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">7</div>
+      <div>
+        <div class="sec-label">Magasins par Ville</div>
+        <div class="sec-sub">40 enseignes géolocalisées dans 6 villes du Cameroun</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="n">40+</div><div class="l">Magasins total</div></div>
+      <div class="stat"><div class="n">6</div><div class="l">Villes couvertes</div></div>
+      <div class="stat"><div class="n">GPS</div><div class="l">Coordonnées réelles</div></div>
+      <div class="stat"><div class="n">500 F</div><div class="l">Frais livraison</div></div>
+    </div>
+    <table class="city-table">
+      <thead>
+        <tr><th>Ville</th><th>Enseigne</th><th>Type</th><th>Livraison</th><th>Frais</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="5" style="font-weight:800;color:#00c471;vertical-align:top;padding-top:12px;">Douala<br><span style="font-size:8px;color:#94a3b8;font-weight:400;">15 magasins</span></td>
+          <td>Mahima Akwa</td><td><span class="pill pill-green">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.5</td></tr>
+        <tr><td>Casino Bonanjo</td><td><span class="pill pill-green">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.3</td></tr>
+        <tr><td>Carrefour Market</td><td><span class="pill pill-green">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.6</td></tr>
+        <tr><td>Santa Lucia Bonapriso</td><td><span class="pill pill-green">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.4</td></tr>
+        <tr><td>Boulangerie Calafatas, Score, Orca Deco, Leader Price, Super U Ndokoti, Spar, Le Fournil, Marché Sandaga, New Bell, Dovv, Boucherie Moderne</td><td><span class="pill pill-gray">Divers</span></td><td>✅/❌</td><td>300–500 F</td><td>4.0–4.7</td></tr>
+        <tr><td rowspan="4" style="font-weight:800;color:#1a73e8;vertical-align:top;padding-top:12px;">Yaoundé<br><span style="font-size:8px;color:#94a3b8;font-weight:400;">12 magasins</span></td>
+          <td>Mahima Yaoundé</td><td><span class="pill pill-blue">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.5</td></tr>
+        <tr><td>Casino Bastos</td><td><span class="pill pill-blue">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.4</td></tr>
+        <tr><td>Carrefour Market Yaoundé</td><td><span class="pill pill-blue">Supermarché</span></td><td>✅</td><td>500 F</td><td>⭐ 4.5</td></tr>
+        <tr><td>Marché Central, Mokolo, Mfoundi, Santa Lucia, Spar, Le Fournil, Dovv, Boucherie</td><td><span class="pill pill-gray">Divers</span></td><td>✅/❌</td><td>300–500 F</td><td>4.0–4.7</td></tr>
+        <tr><td style="font-weight:800;color:#f97316;">Bafoussam<br><span style="font-size:8px;color:#94a3b8;font-weight:400;">4 magasins</span></td>
+          <td>Super U, Casino, Marché Central, Marché A</td><td><span class="pill pill-orange">Mixte</span></td><td>✅/❌</td><td>400 F</td><td>4.0–4.3</td></tr>
+        <tr><td style="font-weight:800;color:#8b5cf6;">Garoua<br><span style="font-size:8px;color:#94a3b8;font-weight:400;">3 magasins</span></td>
+          <td>Grand Marché, Super Marché Garoua, Casino Garoua</td><td><span class="pill pill-purple">Mixte</span></td><td>✅/❌</td><td>500 F</td><td>4.0–4.2</td></tr>
+        <tr><td style="font-weight:800;color:#14b8a6;">Bamenda<br><span style="font-size:8px;color:#94a3b8;font-weight:400;">3 magasins</span></td>
+          <td>Main Market, Supermarché Bamenda, Food Market</td><td><span class="pill pill-gray">Mixte</span></td><td>✅/❌</td><td>400 F</td><td>4.0–4.2</td></tr>
+        <tr><td style="font-weight:800;color:#ef4444;">Maroua<br><span style="font-size:8px;color:#94a3b8;font-weight:400;">3 magasins</span></td>
+          <td>Grand Marché Central, Supermarché Maroua, Casino Maroua</td><td><span class="pill pill-gray">Mixte</span></td><td>✅/❌</td><td>500 F</td><td>4.0–4.2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 8 : FONCTIONS UTILITAIRES -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-num">8</div>
+      <div>
+        <div class="sec-label">Fonctions d'Accès aux Données</div>
+        <div class="sec-sub">API interne exportée par <code>database.ts</code></div>
+      </div>
+    </div>
+    <table class="lang-table">
+      <thead>
+        <tr><th>Fonction</th><th>Paramètre</th><th>Retour</th><th>Utilisation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>getAllProducts()</code></td><td>—</td><td><code>Product[]</code></td><td>Page d'accueil, catalogue</td></tr>
+        <tr><td><code>getProductById(id)</code></td><td><code>number</code></td><td><code>Product | undefined</code></td><td>Détail produit, commande</td></tr>
+        <tr><td><code>getProductByBarcode(barcode)</code></td><td><code>string</code></td><td><code>Product | undefined</code></td><td>Scanner de codes-barres</td></tr>
+        <tr><td><code>searchProducts(query)</code></td><td><code>string</code></td><td><code>Product[]</code></td><td>Barre de recherche accueil</td></tr>
+        <tr><td><code>getProductsByCategory(cat)</code></td><td><code>string</code></td><td><code>Product[]</code></td><td>Filtres catalogue</td></tr>
+        <tr><td><code>getAllStores()</code></td><td>—</td><td><code>Store[]</code></td><td>Liste complète magasins</td></tr>
+        <tr><td><code>getStoreById(id)</code></td><td><code>number</code></td><td><code>Store | undefined</code></td><td>Détail magasin</td></tr>
+        <tr><td><code>getStoresByCity(city)</code></td><td><code>string</code></td><td><code>Store[]</code></td><td>Filtrage par ville sélectionnée</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>PriceCheck — Technologies &amp; Base de Données — Mars 2026</span>
+    <span>Document Technique Confidentiel</span>
+  </div>
+
+</div><!-- end page 5 -->
+
+<!-- PRINT BUTTON -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:9999;" class="no-print">
+  <button onclick="window.print()"
+    style="background:linear-gradient(135deg,#00c471,#00a85e);color:white;border:none;
+    padding:14px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,196,113,0.4);font-family:Inter,sans-serif;letter-spacing:0.01em;">
+    🖨️ Sauvegarder en PDF
+  </button>
+</div>
+<style>@media print{.no-print{display:none!important;}}</style>
+
+</div><!-- end .page -->
+</body>
+</html>

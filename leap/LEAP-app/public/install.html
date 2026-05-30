@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installer PriceCheck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .install-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .install-btn:active {
+            transform: translateY(0);
+        }
+        
+        .features {
+            text-align: left;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .platform {
+            margin-bottom: 20px;
+        }
+        
+        .platform-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .success {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📱</div>
+        <h1>Installer PriceCheck</h1>
+        <p class="subtitle">Comparez les prix dans tous les supermarchés</p>
+        
+        <button class="install-btn" id="installBtn">
+            ⬇️ Installer l'Application
+        </button>
+        
+        <div class="success" id="successMsg">
+            ✅ Installation réussie! L'application est maintenant sur votre écran d'accueil.
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">📷</span>
+                <span>Scanner de code-barre</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">💰</span>
+                <span>Comparaison de prix en temps réel</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🛒</span>
+                <span>Panier d'achat intelligent</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📦</span>
+                <span>Suivi de commandes</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔔</span>
+                <span>Notifications de promotions</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📖 Instructions d'installation</h3>
+            
+            <div class="platform">
+                <div class="platform-title">Sur Android (Chrome):</div>
+                <ol>
+                    <li>Appuyez sur les <strong>3 points</strong> (⋮) en haut à droite</li>
+                    <li>Sélectionnez <strong>"Ajouter à l'écran d'accueil"</strong></li>
+                    <li>Confirmez l'installation</li>
+                </ol>
+            </div>
+            
+            <div class="platform">
+                <div class="platform-title">Sur iPhone (Safari):</div>
+                <ol>
+                    <li>Appuyez sur le bouton <strong>Partager</strong> (⎙) en bas</li>
+                    <li>Sélectionnez <strong>"Sur l'écran d'accueil"</strong></li>
+                    <li>Appuyez sur <strong>"Ajouter"</strong></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        const successMsg = document.getElementById('successMsg');
+        
+        // Détecter la plateforme
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /Android/.test(navigator.userAgent);
+        
+        // Écouter l'événement beforeinstallprompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+        });
+        
+        // Gérer le clic sur le bouton d'installation
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Android/Desktop avec support natif
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    successMsg.style.display = 'block';
+                    installBtn.style.display = 'none';
+                }
+                
+                deferredPrompt = null;
+            } else if (isIOS) {
+                // iOS - Afficher les instructions
+                alert('Pour installer sur iPhone:\n\n1. Appuyez sur le bouton Partager (⎙)\n2. Sélectionnez "Sur l\'écran d\'accueil"\n3. Appuyez sur "Ajouter"');
+            } else {
+                // Rediriger vers la page d'accueil
+                window.location.href = '/';
+            }
+        });
+        
+        // Détecter si l'app est déjà installée
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            installBtn.textContent = '✅ Application déjà installée';
+            installBtn.disabled = true;
+            installBtn.style.opacity = '0.6';
+        }
+        
+        // Après installation réussie
+        window.addEventListener('appinstalled', () => {
+            successMsg.style.display = 'block';
+            installBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  
+  <!-- PWA Meta Tags -->
+  <meta name="application-name" content="MALAP METSI">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="MALAP METSI">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#00d084">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Comparez les prix dans tous les supermarchés de Douala. Économisez jusqu'à 30% sur vos courses quotidiennes.">
+  <meta name="keywords" content="prix, supermarché, Douala, Cameroun, comparaison, courses, économies">
+  <meta name="author" content="MALAP METSI">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MALAP METSI - Comparateur de Prix">
+  <meta property="og:description" content="Comparez les prix dans tous les supermarchés de Douala">
+  <meta property="og:image" content="/og-image.png">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MALAP METSI - Comparateur de Prix">
+  <meta name="twitter:description" content="Comparez les prix dans tous les supermarchés de Douala">
+  
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  
+  <!-- Cache Control -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>MALAP METSI - Comparez les prix</title>
+</head>
+<body>
+  <div id="app">
+    <div style="padding: 50px; text-align: center; font-family: Arial;">
+      <h1 style="color: #00d084;">⏳ Chargement de MALAP METSI...</h1>
+      <p style="color: #666;">Version: <span id="version"></span></p>
+      <p style="color: #999; font-size: 0.9em;">Si ce message reste visible, rechargez la page</p>
+    </div>
+  </div>
+  <script type="module">
+    // Afficher la version pour vérifier le rechargement
+    const version = new Date().toLocaleTimeString('fr-FR');
+    document.getElementById('version').textContent = version;
+    
+    console.log('=== MALAP METSI Loading v3.0 ===');
+    console.log('Version:', version);
+    
+    // Import direct sans paramètres dynamiques (Vite ne supporte pas les variables dans les imports)
+    import('./src/main.ts').then(() => {
+      console.log('✅ Main module loaded successfully v3.0');
+      console.log('✅ 30 produits chargés depuis la base de données');
+    }).catch(err => {
+      console.error('❌ Error loading main module:', err);
+      const app = document.querySelector('#app');
+      if (app) {
+        app.innerHTML = `
+          <div style="padding: 50px; text-align: center;">
+            <h1 style="color: red;">❌ Erreur de Chargement</h1>
+            <p style="color: #666;">${err.message}</p>
+            <button onclick="location.reload(true)" style="padding: 15px 30px; background: #00d084; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1em; margin-top: 20px;">
+              🔄 Recharger la page
+            </button>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

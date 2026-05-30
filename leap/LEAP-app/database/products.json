@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Lait Entier Bio 1L",
+    "image": "🥛",
+    "category": "Produits laitiers",
+    "barcode": "3760074380534",
+    "description": "Lait entier biologique de qualité supérieure",
+    "prices": [
+      { "store": "Mahima Akwa", "price": 2200, "stock": 50 },
+      { "store": "Casino Bonanjo", "price": 2350, "stock": 30 },
+      { "store": "Leader Price", "price": 2300, "stock": 45 },
+      { "store": "Santa Lucia", "price": 2400, "stock": 25 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Pain Complet 500g",
+    "image": "🍞",
+    "category": "Boulangerie",
+    "barcode": "3760074380535",
+    "description": "Pain complet frais du jour",
+    "prices": [
+      { "store": "Leader Price", "price": 1500, "stock": 100 },
+      { "store": "Carrefour Market", "price": 1600, "stock": 80 }
+    ]
+  }
+]
+,
+  {
+    "id": 3,
+    "name": "Œufs Bio x12",
+    "image": "🥚",
+    "category": "Produits frais",
+    "barcode": "3760074380536",
+    "description": "Œufs biologiques de poules élevées en plein air",
+    "prices": [
+      { "store": "Santa Lucia", "price": 3200, "stock": 40 },
+      { "store": "Orca Deco", "price": 3100, "stock": 35 }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Huile d'Olive 1L",
+    "image": "🫒",
+    "category": "Épicerie",
+    "barcode": "3760074380537",
+    "description": "Huile d'olive extra vierge première pression",
+    "prices": [
+      { "store": "Carrefour Market", "price": 4500, "stock": 20 },
+      { "store": "Casino Bonanjo", "price": 4400, "stock": 25 }
+    ]
+  }
+]

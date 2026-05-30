@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <!-- Loupe -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#333" stroke-width="5"/>
+  <!-- Panier dans la loupe -->
+  <text x="20" y="38" font-size="18" text-anchor="middle" dominant-baseline="middle">🛒</text>
+  <!-- Poignée loupe -->
+  <line x1="48" y1="48" x2="60" y2="60" stroke="#333" stroke-width="5" stroke-linecap="round"/>
+  <!-- Barres graphique (vert/orange/rouge) -->
+  <rect x="42" y="22" width="5" height="14" rx="1" fill="#e74c3c"/>
+  <rect x="49" y="16" width="5" height="20" rx="1" fill="#f39c12"/>
+  <rect x="56" y="10" width="5" height="26" rx="1" fill="#27ae60"/>
+  <!-- FCFA tag -->
+  <rect x="14" y="36" width="28" height="12" rx="3" fill="#e74c3c"/>
+  <text x="28" y="44" font-size="6.5" fill="white" text-anchor="middle" font-weight="bold" font-family="Arial">FCFA</text>
+
+  <!-- Price -->
+  <text x="78" y="38" font-size="28" font-weight="900" font-family="Arial, sans-serif" fill="#27ae60">Price</text>
+  <text x="163" y="38" font-size="28" font-weight="900" font-family="Arial, sans-serif" fill="#f39c12">Check</text>
+  <!-- Checkmark -->
+  <polyline points="248,18 254,30 268,14" fill="none" stroke="#e74c3c" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Tagline -->
+  <text x="78" y="56" font-size="11" font-family="Arial, sans-serif" fill="#555" font-style="italic">Comparez. Économisez. Achetez.</text>
+</svg>
