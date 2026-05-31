@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "cd leap/LEAP-app && npm run dev",
-    "build": "cd leap/LEAP-app && npm run build",
+    "build": "cd leap/LEAP-app && npm install && npm run build",
     "preview": "cd leap/LEAP-app && npm run preview",
-    "start": "node server.js",
+    "start": "cd leap/LEAP-app && npm run preview",
     "install-all": "npm install && cd leap/LEAP-app && npm install"
   },
   "keywords": ["pricecheck", "ecommerce", "cameroon"],
