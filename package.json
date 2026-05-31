@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "LEAP - PriceCheck Application",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "cd leap/LEAP-app && npm run dev",
     "build": "cd leap/LEAP-app && npm run build",
     "preview": "cd leap/LEAP-app && npm run preview",
+    "start": "node server.js",
     "install-all": "npm install && cd leap/LEAP-app && npm install"
   },
   "keywords": ["pricecheck", "ecommerce", "cameroon"],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
+

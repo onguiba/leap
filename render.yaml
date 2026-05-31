@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: pricecheck
+    runtime: node
+    buildCommand: cd leap/LEAP-app && npm install && npm run build
+    startCommand: cd leap/LEAP-app && npm run preview
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
