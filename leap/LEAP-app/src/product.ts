@@ -1,5 +1,5 @@
-import { attachNavigationListeners, navigateTo } from './router';
-import { setDbJson } from './app-db';
+import { attachNavigationListeners } from './router';
+
 import { addToCart } from './orders';
 
 interface Product {

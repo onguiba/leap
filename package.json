@@ -1,0 +1,15 @@
+{
+  "name": "leap-monorepo",
+  "version": "1.0.0",
+  "description": "LEAP - PriceCheck Application",
+  "private": true,
+  "scripts": {
+    "dev": "cd leap/LEAP-app && npm run dev",
+    "build": "cd leap/LEAP-app && npm run build",
+    "preview": "cd leap/LEAP-app && npm run preview",
+    "install-all": "npm install && cd leap/LEAP-app && npm install"
+  },
+  "keywords": ["pricecheck", "ecommerce", "cameroon"],
+  "author": "",
+  "license": "MIT"
+}

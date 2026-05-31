@@ -1,4 +1,4 @@
-import { attachNavigationListeners, navigateTo } from './router';
+import { attachNavigationListeners } from './router';
 import { getProductByBarcode, getStoresByCity } from './database';
 import { getCurrentCity } from './city-selector';
 import { addToCart } from './orders';

@@ -1,4 +1,4 @@
-import { attachNavigationListeners, navigateTo } from './router';
+import { attachNavigationListeners } from './router';
 import { generateProductCardImage } from './barcode-generator';
 import { getDbJson, setDbJson } from './app-db';
 import { addToCart } from './orders';

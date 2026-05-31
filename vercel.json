@@ -1,0 +1,14 @@
+{
+  "buildCommand": "cd leap/LEAP-app && npm run build",
+  "outputDirectory": "leap/LEAP-app/dist",
+  "framework": "vite",
+  "env": {
+    "VITE_API_URL": "@vite_api_url"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
