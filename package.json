@@ -8,14 +8,14 @@
     "dev": "cd leap/LEAP-app && npm run dev",
     "build": "bash build.sh",
     "preview": "cd leap/LEAP-app && npm run preview",
-    "start": "bash start.sh",
+    "start": "node server-static.js",
     "install-all": "npm install && cd leap/LEAP-app && npm install"
   },
   "keywords": ["pricecheck", "ecommerce", "cameroon"],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "http-server": "^14.1.1"
+    "express": "^5.2.1"
   },
   "engines": {
     "node": ">=18.18.0",
