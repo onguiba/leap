@@ -325,11 +325,11 @@ export const PRODUCTS: Product[] = [
   ]},
   {
     id: 31,
-    name: "Supermont 1kg",
-    image: "🧂",
-    category: "Épicerie",
+    name: "Eau Supermont 1Litre",
+    image: "💧",
+    category: "Boissons",
     barcode: "6170001002020",
-    description: "Sel iodé Supermont de qualité supérieure",
+    description: "Eau Minérale Supermont de qualité supérieure",
     prices: [
       { store: "Supermarché G", price: 800, stock: 150 },   // Leader Price
       { store: "Supermarché A", price: 850, stock: 120 },   // Mahima Akwa
